@@ -54,9 +54,9 @@ Structure of the project:
 ├── Makefile
 ├── README.md
 ├── secrets
-│   ├── docker-compose.yml
-│   ├── .env
-│   └── requirements
+│   ├── db_password.txt
+│   ├── db_root_password.txt
+│   └── wp_admin_password.txt
 └── srcs
     ├── docker-compose.yml
     ├── .env
