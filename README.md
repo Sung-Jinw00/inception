@@ -61,17 +61,17 @@ Structure of the project:
     ├── .env
     └── requirements
         ├── mariadb
-        │   ├── Dockerfile
-        │   ├── conf
-        │   |   └── my.cnf
-        │   └── tools
-        │       └── entrypoint.sh
+        │   ├── Dockerfile
+        │   ├── conf
+        │   │   └── my.cnf
+        │   └── tools
+        │       └── entrypoint.sh
         ├── nginx
-        │   ├── Dockerfile
-        │   ├── tools
-        │   │   └── generate_certs.sh
-        |   └── conf
-        │       └── default.conf
+        │   ├── Dockerfile
+        │   ├── tools
+        │   │   └── generate_certs.sh
+        │   └── conf
+        │       └── default.conf
         └── wordpress
             ├── Dockerfile
             └── tools
