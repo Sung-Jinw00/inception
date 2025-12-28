@@ -49,6 +49,7 @@ To run the project:
 
 Structure of the project:
 
+```text
 .
 ├── Makefile
 ├── README.md
@@ -77,6 +78,7 @@ Structure of the project:
             └── tools
                 ├── entrypoint.sh
                 └── setup.sh
+```
 
 
 - **`srcs/.env`**: Stores environment variables like `DOMAIN_NAME`, `MYSQL_USER`, `MYSQL_PASSWORD`.  
