@@ -1,0 +1,74 @@
+
+services:
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+      args:
+        LOGIN: locagnio
+    image: my_mariadb
+    container_name: mariadb
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ../secrets/db_password.txt:/secrets/db_password.txt:ro
+      - ../secrets/db_root_password.txt:/secrets/db_root_password.txt:ro
+    networks:
+      - inception
+    
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+      args:
+        LOGIN: locagnio
+    image: my_wordpress
+    container_name: wordpress
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress_data:/var/www/wordpress
+      - ../secrets/db_password.txt:/secrets/db_password.txt:ro
+      - ../secrets/wp_admin_password.txt:/secrets/wp_admin_password.txt:ro
+    networks:
+      - inception
+
+  nginx:
+    build:
+      context: ./requirements/nginx
+      args:
+        LOGIN: locagnio
+    image: my_nginx
+    container_name: nginx
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress_data:/var/www/wordpress:ro
+    networks:
+      - inception
+    ports:
+      - "8443:443"
+
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/locagnio/data/mariadb
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/locagnio/data/wordpress
+    
+networks:
+  inception:
+    driver: bridge
